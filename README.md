@@ -31,7 +31,7 @@
 ## Instalation 
 
 ``` shell
-git clone https://github.com/Sharan-2008/AI-Powered-Library-Management-System-
+git clone https://github.com/Sharan-2008/AI-Powered-Library-Management-System
 
 cd AI-Powered-Library-Management-System
 

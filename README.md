@@ -30,10 +30,15 @@
 
 ## Instalation 
 
-git clone <repository-url>
-cd AI-Powered-Library-Management-System 
-pip install -r requirements.txt 
+``` shell
+git clone https://github.com/Sharan-2008/AI-Powered-Library-Management-System-
+
+cd AI-Powered-Library-Management-System
+
+pip install -r requirements.txt
+
 python AI_LMS_project.py
+```
 
 ## Future Enhancement
 

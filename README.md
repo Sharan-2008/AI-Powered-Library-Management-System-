@@ -28,15 +28,36 @@
 - models.py - Data models
 - requirements.txt - Dependencies 
 
-## Instalation 
+## Environment Variables
 
-``` shell
+Create a `.env` file in the project root directory and add the following variables:
+
+```env
+ADMIN_PASSWORD=your_admin_password
+DB_HOST=localhost
+DB_USER=your_database_username
+DB_PASSWORD=your_database_password
+DB_NAME=library_db
+```
+
+Replace the placeholder values with your own database credentials and admin password before running the application.
+
+## Installation
+
+```bash
 git clone https://github.com/Sharan-2008/AI-Powered-Library-Management-System-
 
 cd AI-Powered-Library-Management-System
 
 pip install -r requirements.txt
 
+```
+
+Create a `.env` file and configure the required environment variables as shown above.
+
+Run the application:
+
+```bash
 python AI_LMS_project.py
 ```
 

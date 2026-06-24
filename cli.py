@@ -18,7 +18,7 @@ def admin_menu():
     2. Delete Book 
     3. View All Books
     4. Genre-wise Book count
-    5. Bar-graph for total books
+    5. Bar-graph for books (genre wise)
     6. Exit
 
 -------------------------------------------------

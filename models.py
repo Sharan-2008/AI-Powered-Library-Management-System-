@@ -1,4 +1,3 @@
-import bcrypt
 import matplotlib.pyplot as plt
 from datetime import date
 import db
@@ -8,9 +7,23 @@ def register_user(userid, username, password):
     conn = db.get_connection()
     cursor = conn.cursor(buffered=True)
     try:
-        cursor.execute("INSERT INTO users (userid, username, password) VALUES (%s,%s,%s)", (userid, username, password))
+        cursor.execute(
+            "SELECT userid FROM users WHERE userid=%s",
+            (userid,)
+        )
+
+        if cursor.fetchone():
+            print("User ID already exists.")
+            return False
+
+        cursor.execute(
+            "INSERT INTO users (userid, username, password) VALUES (%s,%s,%s)",
+            (userid, username, password)
+        )
+
         conn.commit()
         return True
+
     finally:
         cursor.close()
         conn.close()
@@ -25,7 +38,7 @@ def authenticate_user(userid, password):
         if not row:
             return None
         stored_hash, username = row
-        if bcrypt.checkpw(password.encode(), stored_hash.encode()):
+        if password == stored_hash:
             return (userid, username)
         return None
     finally:
@@ -65,19 +78,35 @@ def view_books():
         cursor.close()
         conn.close()
 
-
 def delete_book(book_id):
     conn = db.get_connection()
     cursor = conn.cursor()
     try:
         cursor.execute("SELECT * FROM books WHERE b_id=%s", (int(book_id),))
         book = cursor.fetchone()
+
         if not book:
             print("Book not found.")
             return
-        cursor.execute("DELETE FROM books WHERE b_id=%s", (int(book_id),))
+
+        # Check if the book is currently issued
+        cursor.execute(
+            "SELECT * FROM issued_books WHERE b_id=%s",
+            (int(book_id),)
+        )
+
+        if cursor.fetchone():
+            print("Cannot delete. This book is currently borrowed by a user.")
+            return
+
+        cursor.execute(
+            "DELETE FROM books WHERE b_id=%s",
+            (int(book_id),)
+        )
+
         conn.commit()
         print("Book deleted successfully.")
+
     finally:
         cursor.close()
         conn.close()

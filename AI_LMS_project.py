@@ -8,12 +8,6 @@ conn = mysql.connector.connect(
     password='p@ssword'  
 )
 
-cursor = conn.cursor()
-
-# Create database if it doesn't exist
-cursor.execute("CREATE DATABASE IF NOT EXISTS library_db")
-conn.database = 'library_db'
-
 import db
 import cli
 
